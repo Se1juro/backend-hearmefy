@@ -1,19 +1,13 @@
 import "reflect-metadata";
-import {
-  createConnection,
-  getConnectionOptions,
-  useContainer as typeOrmContainer,
-} from "typeorm";
 import { useContainer as routeContainer } from "routing-controllers";
-import { Container } from "typedi";
+import { Container } from "typeorm-typedi-extensions";
 import app from "./app";
+import { AppDataSource } from "./config/db";
 
 const main = async () => {
   try {
-    typeOrmContainer(Container);
     routeContainer(Container);
-    const options = await getConnectionOptions();
-    await createConnection(options);
+    await AppDataSource.initialize();
     console.log("Database connected");
     app.listen(process.env.HOST_PORT);
     console.log("Server listening on port", process.env.HOST_PORT);

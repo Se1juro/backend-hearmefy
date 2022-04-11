@@ -1,6 +1,7 @@
-const { resolve } = require("path");
+import { resolve } from "path";
+import { DataSource } from "typeorm";
 
-module.exports = {
+export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.DATABASE_HOST,
   port: Number(process.env.DATABASE_PORT),
@@ -10,4 +11,4 @@ module.exports = {
   logging: true,
   synchronize: false,
   entities: [resolve(__dirname + "/src/models/*.ts")],
-};
+});

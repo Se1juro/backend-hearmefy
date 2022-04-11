@@ -1,9 +1,8 @@
-import { EntityRepository, Repository } from "typeorm";
+import { AppDataSource } from "../config/db";
 import { Users } from "../models/users.model";
 
-@EntityRepository(Users)
-export class UserRepository extends Repository<Users> {
-  async findUsers(page?: number, limit?: number) {
-    return "Equisde moment";
-  }
-}
+export const UserRepository = AppDataSource.getRepository(Users).extend({
+  async findUsers(page?: number, limit?: number): Promise<string> {
+    return await "Hello world";
+  },
+});

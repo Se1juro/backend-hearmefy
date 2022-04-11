@@ -3,7 +3,7 @@ import { UserService } from "../Service/user.service";
 
 @JsonController("/api/users")
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(protected readonly userService: UserService) {}
 
   @Post("/")
   getUsers(@Body() data: any) {
