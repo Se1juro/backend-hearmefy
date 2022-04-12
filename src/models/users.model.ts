@@ -3,6 +3,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
+  IsNull,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -19,6 +21,15 @@ export class Users extends BaseEntity {
   lastName: string;
 
   @Column()
+  @Index({ unique: true })
+  email: string;
+
+  @Column({ nullable: true, unique: true })
+  userName?: string;
+
+  @Column({
+    default: true,
+  })
   active: boolean;
 
   @CreateDateColumn()

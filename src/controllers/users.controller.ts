@@ -1,12 +1,13 @@
 import { Body, JsonController, Post } from "routing-controllers";
 import { UserService } from "../Service/user.service";
+import { CreateUserValidator } from "../validators/createUser.validator";
 
 @JsonController("/api/users")
 export class UserController {
   constructor(protected readonly userService: UserService) {}
 
   @Post("/")
-  getUsers(@Body() data: any) {
-    return this.userService.getUsers();
+  createUser(@Body() data: CreateUserValidator) {
+    return this.userService.createUser(data);
   }
 }

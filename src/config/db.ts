@@ -1,6 +1,5 @@
 import { resolve } from "path";
 import { DataSource } from "typeorm";
-
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.DATABASE_HOST,
@@ -9,6 +8,6 @@ export const AppDataSource = new DataSource({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
   logging: true,
-  synchronize: false,
-  entities: [resolve(__dirname + "/src/models/*.ts")],
+  synchronize: true,
+  entities: [resolve("./src/models/*.ts")],
 });
